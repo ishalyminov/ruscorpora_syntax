@@ -11,7 +11,10 @@ class SynTagRus2ConllHandler(xml.sax.handler.ContentHandler):
 
     def characters(self, content):
         if self.__in_word:
-            self.__word_features['FORM'] += content
+            if 'FORM' not in self.__word_features:
+                self.__word_features['FORM'] = content
+            else:
+                self.__word_features['FORM'] += content
 
     def startDocument(self):
         pass
@@ -23,20 +26,21 @@ class SynTagRus2ConllHandler(xml.sax.handler.ContentHandler):
         if tag == 'W':
             self.__in_word = True
             self.__word_features = {attr_name: in_attrs[attr_name] for attr_name in in_attrs._attrs}
-            self.__word_features['FORM'] = ''
+            if self.__word_features['DOM'] == '_root':
+                self.__word_features['DOM'] = '0'
 
     def endElement(self, tag):
         if tag == 'S':
-            self.__out.write('\n')
+            pass# self.__out.write('\n')
         if tag == 'W':
             self.__flush_word()
         self.__in_word = False
 
     def __flush_word(self):
-        print >>self.__out, '\t'.join([self.__word_features.get('ID', '-'),
-                                       self.__word_features.get('FORM', '-'),
+        print >>self.__out, '\t'.join([self.__word_features.get('FORM', '-'),
+                                       '.'.join(self.__word_features.get('FEAT', '-').split(' ')),
                                        self.__word_features.get('DOM', '-'),
-                                       self.__word_features.get('LINK', '-')])
+                                       self.__word_features.get('LINK', '_')])
 
 
 def convert(in_source, in_destination):
