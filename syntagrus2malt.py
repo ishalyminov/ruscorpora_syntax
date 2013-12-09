@@ -3,7 +3,7 @@ import xml.sax
 import sys
 
 
-class SynTagRus2ConllHandler(xml.sax.handler.ContentHandler):
+class SynTagRus2MaltHandler(xml.sax.handler.ContentHandler):
     def __init__(self, out_destination):
         self.__out = out_destination
         self.__in_word = False
@@ -31,7 +31,7 @@ class SynTagRus2ConllHandler(xml.sax.handler.ContentHandler):
 
     def endElement(self, tag):
         if tag == 'S':
-            pass# self.__out.write('\n')
+            self.__out.write('\n')
         if tag == 'W':
             self.__flush_word()
         self.__in_word = False
@@ -47,7 +47,7 @@ def convert(in_source, in_destination):
     out = in_destination
     if isinstance(in_destination, str):
         out = codecs.getwriter('utf-8')(open(in_destination, 'wb'), 'xmlcharrefreplace')
-    handler = SynTagRus2ConllHandler(out)
+    handler = SynTagRus2MaltHandler(out)
     parser = xml.sax.make_parser()
     parser.setContentHandler(handler)
     parser.parse(in_source)

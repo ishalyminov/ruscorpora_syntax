@@ -1,0 +1,9 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="ruscorpora_syntax" default="download_malt">
+  <description>
+    Dependency parsing with MaltParser built on top of the Ruscorpora syntax corpus
+  </description>
+
+  <target name="download_malt">
+    <ivy:retrieve />
+  </target>
+</project>

@@ -1,0 +1,3 @@
+[submodule "ruscorpora_tagging"]
+	path = ruscorpora_tagging
+	url = https://github.com/ishalyminov/ruscorpora_tagging.git

@@ -1,0 +1,6 @@
+<ivy-module version="2.0">
+    <info organisation="org.apache" module="ruscorpora_syntax"/>
+    <dependencies>
+        <dependency org="org.maltparser" name="maltparser" rev="1.7.2"/>
+    </dependencies>
+</ivy-module>
