@@ -37,10 +37,11 @@ class SynTagRus2MaltHandler(xml.sax.handler.ContentHandler):
         self.__in_word = False
 
     def __flush_word(self):
-        print >>self.__out, '\t'.join([self.__word_features.get('FORM', '-'),
-                                       '.'.join(self.__word_features.get('FEAT', '-').split(' ')),
-                                       self.__word_features.get('DOM', '-'),
-                                       self.__word_features.get('LINK', '_')])
+        string_to_flush = '\t'.join([self.__word_features.get('FORM', '-'),
+                                    '.'.join(self.__word_features.get('FEAT', '-').split(' ')),
+                                    self.__word_features.get('DOM', '-'),
+                                    self.__word_features.get('LINK', '_')])
+        print >>self.__out, string_to_flush.encode('utf-8')
 
 
 def convert(in_source, in_destination):
