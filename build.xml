@@ -5,5 +5,13 @@
 
   <target name="download_malt">
     <ivy:retrieve />
+    <mkdir dir="lib/lib"/>
+    <move file="lib/log4j-1.2.16.jar" tofile="lib/lib/log4j.jar"/>
+    <move file="lib/libsvm-3.1.jar" tofile="lib/lib/libsvm.jar"/>
+    <move file="lib/liblinear-1.8.jar" todir="lib/lib"/>
+    <symlink link="lib/malt.jar" resource="maltparser-1.7.2.jar"/>
+  </target>
+  <target name="clean">
+    <delete dir="lib"/>
   </target>
 </project>
