@@ -1,7 +1,70 @@
+# -*- coding: utf-8 -*-
+
 import codecs
 import xml.sax
 import sys
 
+# ruscorpora tags: http://ruscorpora.ru/corpora-morph.html
+# syntagrus tags: http://ruscorpora.ru/instruction-syntax.html
+SYNTAGRUS_TO_RUSCORPORA_MAPPING = {
+    # gender
+    'муж': 'm',
+    'жен': 'f',
+    'муж-жен': 'm-f',
+    'сред': 'n',
+
+    # number
+    'ед': 'sg',
+    'мн': 'pl',
+
+    # case
+    'им': 'nom',
+    'род': 'gen',
+    'дат': 'dat',
+        # 'dat2',
+    'вин': 'acc',
+    'твор': 'ins',
+    'пр': 'loc',
+    'парт': 'gen2',
+        # 'acc2',
+    'мест': 'loc2',
+    'зв': 'voc',
+        # 'adnum
+
+    # degree of comparison
+    'срав': 'comp',
+    'смяг': 'comp2',
+    'прев': 'supr',
+
+    # adjective form
+    'кр': 'brev', # 'plen' otherwise
+
+    # verb form
+    'инф': 'inf',
+    'прич': 'partcp',
+    'дееприч': 'ger',
+
+    # verb mood
+    'изъяв': 'indic',
+    'пов': 'imper',
+
+    # verb aspect
+    'сов': 'pf',
+    'несов': 'ipf',
+
+    # time
+    'непрош': 'fut',
+    'наст': 'praes',
+    'прош': 'praet',
+
+    # noun form
+    '1-л': '1p',
+    '2-л': '2p',
+    '3-л': '3p',
+
+    # voice
+    'страд': 'pass' # otherwise 'act'
+}
 
 class SynTagRus2MaltHandler(xml.sax.handler.ContentHandler):
     def __init__(self, out_destination):
