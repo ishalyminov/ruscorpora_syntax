@@ -5,7 +5,7 @@ fi
 
 INPUT=$1;
 MODEL_FILE_NAME=$2;
-TRAIN_FILE_NAME=traindata.tab
+TRAIN_FILE_NAME=.tab
 MALT_RESULT_FILE_NAME=malt_result.tab
 
 python converter.py $INPUT > $TRAIN_FILE_NAME
