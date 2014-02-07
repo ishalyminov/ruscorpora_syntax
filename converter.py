@@ -2,10 +2,10 @@ import os
 import sys
 import syntagrus2malt
 
-def process_directory(in_dir_name, in_destination, in_handler):
+def process_directory(in_dir_name, in_destination, in_handler=syntagrus2malt.convert):
     for (root, dirs, files) in os.walk(in_dir_name, followlinks=True):
         for filename in files:
-            in_handler(open(os.path.join(root, filename)))
+            in_handler(open(os.path.join(root, filename)), in_destination)
 
 def main():
     if len(sys.argv) < 2:

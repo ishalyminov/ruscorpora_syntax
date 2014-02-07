@@ -2,7 +2,6 @@
   <description>
     Dependency parsing with MaltParser built on top of the Ruscorpora syntax corpus
   </description>
-
   <target name="download_malt">
     <ivy:retrieve />
     <mkdir dir="lib/lib"/>
@@ -10,6 +9,11 @@
     <move file="lib/libsvm-3.1.jar" tofile="lib/lib/libsvm.jar"/>
     <move file="lib/liblinear-1.8.jar" todir="lib/lib"/>
     <symlink link="lib/malt.jar" resource="maltparser-1.7.2.jar"/>
+    <exec executable="sh">
+      <arg value="download_malt_eval.sh"/>
+    </exec>
+    <move file="malt_eval/lib/MaltEval.jar" todir="lib/"/>
+    <delete dir="malt_eval"/>
   </target>
   <target name="clean">
     <delete dir="lib"/>

@@ -11,7 +11,9 @@ TRAIN_FILE_NAME=train.malttab
 mkdir -p $DATASETS_FOLDER
 mkdir -p $DATASETS_FOLDER/corpus_converted
 
+echo "Converting SynTagRus tags to Ruscorpora"
 python syntagrus2ruscorpora.py $INPUT $DATASETS_FOLDER/corpus_converted
+echo "Splitting input corpus into train and test datasets"
 python disamb/create_datasets.py $DATASETS_FOLDER/corpus_converted $DATASETS_FOLDER
 
 python converter.py $DATASETS_FOLDER/train.xml > $DATASETS_FOLDER/$TRAIN_FILE_NAME
