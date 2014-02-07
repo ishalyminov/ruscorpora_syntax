@@ -43,7 +43,7 @@ class SynTagRus2MaltHandler(xml.sax.handler.ContentHandler):
                                     syntagrus2ruscorpora.convert_grammar(self.__word_features.get('FEAT', '-')),
                                     self.__word_features.get('DOM', '-'),
                                     self.__word_features.get('LINK', '_')])
-        print >>self.__out, string_to_flush.encode('utf-8')
+        print >>self.__out, string_to_flush
 
 class RuscorporaSynTagRus2MaltHandler(xml.sax.handler.ContentHandler):
     def __init__(self, out_destination):
@@ -88,12 +88,12 @@ class RuscorporaSynTagRus2MaltHandler(xml.sax.handler.ContentHandler):
                                     self.__word_features.get('gr', '-'),
                                     self.__word_features.get('dom', '-'),
                                     self.__word_features.get('link', '_')])
-        print >>self.__out, string_to_flush.encode('utf-8')
+        print >>self.__out, string_to_flush
 
-def convert(in_source, in_destination):
-    out = in_destination
-    if isinstance(in_destination, str):
-        out = codecs.getwriter('utf-8')(open(in_destination, 'wb'))
+def convert(in_source, out_destination):
+    out = out_destination
+    if isinstance(out_destination, str):
+        out = codecs.getwriter('utf-8')(open(out_destination, 'wb'))
     handler = RuscorporaSynTagRus2MaltHandler(out)
     parser = xml.sax.make_parser()
     parser.setContentHandler(handler)

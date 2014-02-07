@@ -1,6 +1,6 @@
 [submodule "ruscorpora_tagging"]
 	path = ruscorpora_tagging
-	url = https://github.com/ishalyminov/ruscorpora_tagging.git
+	url = git@github.com:ishalyminov/ruscorpora_tagging.git
 [submodule "disamb"]
 	path = disamb
 	url = git://github.com/ishalyminov/disamb.git
