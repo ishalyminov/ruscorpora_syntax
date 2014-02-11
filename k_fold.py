@@ -2,7 +2,6 @@ import os
 import random
 import sys
 from sklearn import cross_validation
-import converter
 from disamb import create_datasets
 import malt_wrapper
 import syntagrus2malt
