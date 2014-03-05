@@ -1,3 +1,4 @@
+import codecs
 import os
 import random
 import sys
@@ -7,6 +8,9 @@ import malt_wrapper
 import syntagrus2malt
 import syntagrus2ruscorpora
 
+'''
+    Training and testing on an already syntactically annotated corpus of the SynTagRus format
+'''
 FOLDS_NUMBER = 6
 DATASETS_FOLDER = 'datasets'
 
@@ -36,7 +40,9 @@ def perform_kfold_cross_validation(in_texts_root):
                                           test_file)
         train_file.close()
         test_file.close()
-        (train_tab, test_tab) = (open('datasets/train.tab', 'w'), open('datasets/test.tab', 'w'))
+        (train_tab, test_tab) = (
+            codecs.getwriter('utf-8')(open('datasets/train.tab', 'w')),
+            codecs.getwriter('utf-8')(open('datasets/test.tab', 'w')))
         syntagrus2malt.convert(os.path.join(DATASETS_FOLDER, 'train.xml'), train_tab)
         syntagrus2malt.convert(os.path.join(DATASETS_FOLDER, 'test.xml'), test_tab)
         train_tab.close()
@@ -50,6 +56,8 @@ def perform_kfold_cross_validation(in_texts_root):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print 'Usage: k_fold.py <source texts root folder>'
+        print 'Usage: k_fold.py <source texts root folder> [folds number]'
         exit(0)
+    if len(sys.argv) > 2:
+        FOLDS_NUMBER = int(sys.argv[2])
     perform_kfold_cross_validation(sys.argv[1])

@@ -134,10 +134,12 @@ def convert(in_file, out_file):
         print >>out_file, line
 
 def convert_directory(in_texts_root, in_result_root):
+    in_texts_root = in_texts_root.rstrip(os.path.pathsep)
+    in_result_root = in_result_root.rstrip(os.path.pathsep)
     if not os.path.isdir(in_result_root):
         os.makedirs(in_result_root)
     for root, dirs, files in os.walk(in_texts_root, followlinks=True):
-        local_root = root[len(in_texts_root) + 1:]
+        local_root = root[len(in_texts_root):]
         result_root = os.path.join(in_result_root, local_root)
         if not os.path.isdir(result_root):
             os.makedirs(result_root)

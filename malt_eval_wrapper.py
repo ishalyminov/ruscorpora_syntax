@@ -4,7 +4,7 @@ import re
 
 class MaltEvalWrapper(object):
     def __init__(self):
-        self.malt_eval_lib = 'dist-20120206/lib/MaltEval.jar'
+        self.malt_eval_lib = 'lib/MaltEval.jar'
 
     def calculate_accuracy(self, in_auto_result, in_gold_result):
         subprocess_cmd = 'java -jar %s  -s %s -g %s' % \
