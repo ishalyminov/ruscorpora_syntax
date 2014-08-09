@@ -50,10 +50,12 @@ class SynTagRus2MaltHandler(xml.sax.handler.ContentHandler):
             if key == 'FEAT' and not WRITE_GRAMMAR_TAGS:
                 self.__word_features[key] = self.__word_features[key].split(',')[0]
 
+        # this particular order is for compatibility for Malt (it ignores lemmas, but we may not)
         string_to_flush = '\t'.join([self.__word_features.get('FORM', '-'),
                                      self.__word_features.get('FEAT', '-'),
                                      self.__word_features.get('DOM', '-'),
-                                     self.__word_features.get('LINK', '_')])
+                                     self.__word_features.get('LINK', '_'),
+                                     self.__word_features.get('LEMMA', '-')])
         print >>self.__out, string_to_flush
 
 
@@ -141,11 +143,11 @@ def main():
     if len(sys.argv) < 4:
         print 'Usage: syntagrus2malt.py <source> <destination> syntagrus/ruscorpora_syntagrus'
         exit()
-    source, destination, format = sys.argv[1:4]
+    source, destination, output_format = sys.argv[1:4]
     if os.path.isdir(source):
-        convert_directory(source, destination, format)
+        convert_directory(source, destination, output_format)
     else:
-        convert(source, destination, format)
+        convert(source, destination, output_format)
 
 if __name__ == '__main__':
     main()
